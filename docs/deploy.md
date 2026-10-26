@@ -21,7 +21,24 @@
    cp .env.example .env   # или создайте вручную
    ```
 
-3. Запустите:
+3. Задайте пароль и секрет сессии. Хеш пароля можно получить прямо из образа (пароль вводится скрытно):
+
+   ```bash
+   docker run --rm -it ghcr.io/hf35/find-job-pet-claude:latest node server/dist/hash-password.js
+   openssl rand -hex 32   # значение для SESSION_SECRET
+   ```
+
+   В `.env` хеш обязательно в одинарных кавычках (в нём есть символы `$`):
+
+   ```
+   ADMIN_USERNAME=admin
+   ADMIN_PASSWORD_HASH='$2b$12$...'
+   SESSION_SECRET=<результат openssl>
+   ```
+
+   Без этих переменных приложение не стартует. Смена пароля или `SESSION_SECRET` завершает все сессии.
+
+4. Запустите:
 
    ```bash
    docker compose up -d

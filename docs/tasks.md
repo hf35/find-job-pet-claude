@@ -55,12 +55,12 @@
 
 Цель: доступ к интерфейсу только по паролю.
 
-- [ ] Пароль задаётся bcrypt-хешем в env `ADMIN_PASSWORD_HASH`, логин — `ADMIN_USERNAME`
-- [ ] Скрипт `npm run hash-password` для генерации хеша
-- [ ] Сессия в подписанной httpOnly cookie (`SESSION_SECRET`), `Secure`, `SameSite=Lax`
-- [ ] Rate limit на `/api/auth/login`
-- [ ] Все `/api/*`, кроме health и login, требуют сессию
-- [ ] Страница входа и кнопка «Выйти» во фронтенде
+- [x] Пароль задаётся bcrypt-хешем в env `ADMIN_PASSWORD_HASH`, логин — `ADMIN_USERNAME`
+- [x] Скрипт `npm run hash-password` для генерации хеша
+- [x] Сессия в подписанной httpOnly cookie (`SESSION_SECRET`), `Secure`, `SameSite=Lax`
+- [x] Rate limit на `/api/auth/login`
+- [x] Все `/api/*`, кроме health и login, требуют сессию
+- [x] Страница входа и кнопка «Выйти» во фронтенде
 
 ## Этап 4. Адаптер hh.ru
 
