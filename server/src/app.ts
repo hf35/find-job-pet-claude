@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 import Fastify, { type FastifyInstance } from 'fastify';
 import fastifyStatic from '@fastify/static';
 import type { Config } from './config.js';
+import { authPlugin } from './auth/plugin.js';
 import { openDatabase, type Db } from './db/index.js';
 
 declare module 'fastify' {
@@ -36,6 +37,8 @@ export async function buildApp(config: Config): Promise<FastifyInstance> {
   const database = openDatabase(config.DATABASE_PATH);
   app.decorate('db', database.db);
   app.addHook('onClose', async () => database.close());
+
+  await authPlugin(app, config);
 
   app.get('/api/health', async () => {
     database.sqlite.prepare('select 1').get();
