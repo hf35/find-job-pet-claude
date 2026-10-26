@@ -11,12 +11,12 @@
 
 Цель: пустое, но собирающееся приложение — сервер отдаёт API и собранный фронтенд.
 
-- [ ] npm workspaces: `server/` (Fastify + TypeScript) и `web/` (React + Vite + TypeScript)
-- [ ] Общие настройки: TypeScript strict, ESM, ESLint, Prettier, Vitest
-- [ ] Конфигурация через env с валидацией (zod), файл `.env.example`
-- [ ] `GET /api/health` → `{ status: "ok", version }`
-- [ ] Fastify раздаёт собранный `web/dist` как статику, SPA-fallback на `index.html`
-- [ ] Скрипты: `dev` (сервер + Vite с прокси), `build`, `start`, `lint`, `test`, `typecheck`
+- [x] npm workspaces: `server/` (Fastify + TypeScript) и `web/` (React + Vite + TypeScript)
+- [x] Общие настройки: TypeScript strict, ESM, ESLint, Prettier, Vitest
+- [x] Конфигурация через env с валидацией (zod), файл `.env.example`
+- [x] `GET /api/health` → `{ status: "ok", version }`
+- [x] Fastify раздаёт собранный `web/dist` как статику, SPA-fallback на `index.html`
+- [x] Скрипты: `dev` (сервер + Vite с прокси), `build`, `start`, `lint`, `test`, `typecheck`
 
 **Готово, когда:** `npm run build && npm start` поднимает приложение на `:8844`, страница открывается, health отвечает.
 
