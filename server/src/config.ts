@@ -4,6 +4,7 @@ const schema = z.object({
   PORT: z.coerce.number().int().min(1).max(65535).default(8844),
   HOST: z.string().default('0.0.0.0'),
   WEB_DIST: z.string().optional(),
+  DATABASE_PATH: z.string().default('./data/app.sqlite'),
   NODE_ENV: z.string().default('development'),
 });
 

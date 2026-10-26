@@ -5,6 +5,13 @@ import { fileURLToPath } from 'node:url';
 import Fastify, { type FastifyInstance } from 'fastify';
 import fastifyStatic from '@fastify/static';
 import type { Config } from './config.js';
+import { openDatabase, type Db } from './db/index.js';
+
+declare module 'fastify' {
+  interface FastifyInstance {
+    db: Db;
+  }
+}
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 
@@ -26,7 +33,14 @@ export async function buildApp(config: Config): Promise<FastifyInstance> {
   });
   const version = readVersion();
 
-  app.get('/api/health', async () => ({ status: 'ok', version }));
+  const database = openDatabase(config.DATABASE_PATH);
+  app.decorate('db', database.db);
+  app.addHook('onClose', async () => database.close());
+
+  app.get('/api/health', async () => {
+    database.sqlite.prepare('select 1').get();
+    return { status: 'ok', version };
+  });
 
   const webDist = path.resolve(config.WEB_DIST ?? path.join(here, '../../web/dist'));
   if (existsSync(webDist)) {
