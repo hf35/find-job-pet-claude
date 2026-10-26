@@ -24,13 +24,13 @@
 
 Цель: образ собирается на GitHub и запускается на VPS за Caddy.
 
-- [ ] Multi-stage `Dockerfile` (сборка → slim runtime, non-root пользователь), `HEALTHCHECK`
-- [ ] Данные (SQLite) в volume `/data`
-- [ ] `docker-compose.yml` для VPS: `127.0.0.1:8844:8844`, volume, `env_file`
-- [ ] GitHub Actions:
-  - [ ] на PR: lint, typecheck, test, сборка образа (без публикации)
-  - [ ] на push в `main` и теги `v*`: публикация в GHCR (`ghcr.io/hf35/find-job-pet-claude`, теги `latest`, `sha-…`, версия)
-- [ ] `docs/deploy.md`: запуск на VPS, пример блока Caddy, обновление образа
+- [x] Multi-stage `Dockerfile` (сборка → slim runtime, non-root пользователь), `HEALTHCHECK`
+- [x] Данные (SQLite) в volume `/data`
+- [x] `docker-compose.yml` для VPS: `127.0.0.1:8844:8844`, volume, `env_file`
+- [x] GitHub Actions:
+  - [x] на PR: lint, typecheck, test, сборка образа (без публикации)
+  - [x] на push в `main` и теги `v*`: публикация в GHCR (`ghcr.io/hf35/find-job-pet-claude`, теги `latest`, `sha-…`, версия)
+- [x] `docs/deploy.md`: запуск на VPS, пример блока Caddy, обновление образа
 
 **Готово, когда:** после merge в `main` образ появляется в GHCR и стартует через `docker compose up -d`.
 
