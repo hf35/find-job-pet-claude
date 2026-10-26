@@ -1,0 +1,11 @@
+services:
+  app:
+    image: ghcr.io/hf35/find-job-pet-claude:latest
+    container_name: find-job
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      # Only reachable from the host (Caddy); never expose to the internet directly
+      - '127.0.0.1:8844:8844'
+    volumes:
+      - ./data:/data
