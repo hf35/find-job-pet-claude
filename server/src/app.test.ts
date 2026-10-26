@@ -4,7 +4,9 @@ import { loadConfig } from './config.js';
 
 describe('app', () => {
   it('responds to /api/health', async () => {
-    const app = await buildApp(loadConfig({ NODE_ENV: 'test', WEB_DIST: '/nonexistent' }));
+    const app = await buildApp(
+      loadConfig({ NODE_ENV: 'test', WEB_DIST: '/nonexistent', DATABASE_PATH: ':memory:' }),
+    );
     const res = await app.inject({ method: 'GET', url: '/api/health' });
     expect(res.statusCode).toBe(200);
     expect(res.json()).toMatchObject({ status: 'ok' });
@@ -12,7 +14,9 @@ describe('app', () => {
   });
 
   it('returns JSON 404 for unknown API routes', async () => {
-    const app = await buildApp(loadConfig({ NODE_ENV: 'test', WEB_DIST: '/nonexistent' }));
+    const app = await buildApp(
+      loadConfig({ NODE_ENV: 'test', WEB_DIST: '/nonexistent', DATABASE_PATH: ':memory:' }),
+    );
     const res = await app.inject({ method: 'GET', url: '/api/nope' });
     expect(res.statusCode).toBe(404);
     await app.close();
